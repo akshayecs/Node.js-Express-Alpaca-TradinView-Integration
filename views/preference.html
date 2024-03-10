@@ -1,0 +1,69 @@
+<!-- preference.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Preferences</title>
+  <link rel="stylesheet" href="../public/preference.css">
+</head>
+<body>
+  <h1>Stock Preferences</h1>
+  <form action="/save-preferences" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="stocks">Select your preferred stocks:</label>
+    <select name="stocks" id="stocks" multiple>
+      <% stocks.forEach(stock => { %>
+        <option value="<%= stock %>"><%= stock %></option>
+      <% }); %>
+    </select>
+    <button type="submit">Save Preferences</button>
+  </form>
+</body>
+</html>
+
+
+
+
+<!-- 
+
+preference.ejs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Preferences</title>
+</head>
+<body>
+  <h1>Stock Preferences</h1>
+  <form id="preferenceForm" action="/save-preferences" method="post">
+    <label for="stocks">Select your preferred stocks:</label>
+    <select name="stocks" id="stocks" multiple>
+      Options will be added dynamically via JavaScript -->
+    <!-- </select>
+    <button type="submit">Save Preferences</button>
+  </form>
+
+  <script>
+    // Fetch stocks from Alpaca API and populate the dropdown
+    window.onload = async function() {
+      const response = await fetch('/fetch-stocks');
+      const stocks = await response.json();
+
+      const select = document.getElementById('stocks');
+      stocks.forEach(stock => {
+        const option = document.createElement('option');
+        option.value = stock.symbol;
+        option.text = `${stock.symbol} - ${stock.name}`;
+        select.appendChild(option);
+      });
+    };
+  </script>
+</body>
+</html> -->
